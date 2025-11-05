@@ -6,7 +6,7 @@ import (
 
 func main() {
 	var investmentAmount int = 100
-	var expectedReturnRate float64 = 5.5
+	expectedReturnRate := 5.5
 
 	var years int = 10
 
