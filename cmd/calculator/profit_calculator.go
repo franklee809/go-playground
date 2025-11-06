@@ -8,14 +8,14 @@ func main() {
 	tax_rate := 0.0
 	println("hello")
 	// Revenue
-	println("Enter revenue: ")
+	print("Enter revenue: ")
 
 	fmt.Scan(&revenue)
-	println("Enter Expense: ")
+	print("Enter Expense: ")
 	// Expense
 	fmt.Scan(&expenses)
 
-	println("Enter Tax rate: ")
+	print("Enter Tax rate: ")
 
 	// Tax rate
 	fmt.Scan(&tax_rate)
@@ -25,8 +25,6 @@ func main() {
 	earning_after_tax := float64(ebt_value) - tax_expenses
 
 	ratio := float64(ebt_value) / float64(earning_after_tax)
-	// The basic formula for calculating EBT is: \(\text{EBT}=\text{Total\ Revenue}-\text{Cost\ of\ Goods\ Sold\ (COGS)}-\text{Operating\ Expenses}-\text{Interest\ Expense}\)Alternatively, you can start with a company's pre-calculated EBIT (Earnings Before Interest and Taxes) and simply subtract the interest expense:
-	// Output EBT, profit and the ratio
 
 	print("EBT : ", ebt_value, "\n")
 	print("Profit : ", int(earning_after_tax), "\n")
