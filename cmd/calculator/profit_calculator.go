@@ -12,7 +12,7 @@ func main() {
 
 	fmt.Scan(&revenue)
 	print("Enter Expense: ")
-	// Expense
+	// Expense test ssh using ~/.ssh/config
 	fmt.Scan(&expenses)
 
 	print("Enter Tax rate: ")
