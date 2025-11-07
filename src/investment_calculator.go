@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -11,7 +12,7 @@ func main() {
 	var years int = 10
 
 	var futureValue float64 = float64(investmentAmount) * math.Pow(1+expectedReturnRate/100, float64(years))
-
-	println("futureValue : ", futureValue)
+	test := 01232.0
+	fmt.Printf("future Value : %.2f \n Future Value (Adjusted for Inflation): %.2f \n", futureValue, test)
 
 }
