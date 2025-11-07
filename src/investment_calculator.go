@@ -9,10 +9,14 @@ func main() {
 	var investmentAmount int = 100
 	expectedReturnRate := 5.5
 
-	var years int = 10
-
+	inflationRate := 1.1
+	var years float64 = 10.0
 	var futureValue float64 = float64(investmentAmount) * math.Pow(1+expectedReturnRate/100, float64(years))
-	test := 01232.0
-	fmt.Printf("future Value : %.2f \n Future Value (Adjusted for Inflation): %.2f \n", futureValue, test)
+	futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
 
+	formattedFV := fmt.Sprintf("Future Value: %1.f \n", futureValue)
+	formattedRFV := fmt.Sprintf("Future Value (Adjusted for Inflation): %.2f \n", futureRealValue)
+
+	// fmt.Printf("future Value : %.2f \n Future Value (Adjusted for Inflation): %.2f \n", futureValue, futureRealValue)
+	fmt.Print(formattedFV, formattedRFV)
 }
