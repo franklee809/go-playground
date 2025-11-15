@@ -3,32 +3,33 @@ package main
 import "fmt"
 
 func main() {
-	revenue := 0
-	expenses := 0
-	tax_rate := 0.0
-	println("hello")
 	// Revenue
-	print("Enter revenue: ")
+	revenue := handleUserInput("Enter revenue: ")
+	expenses := handleUserInput("Enter Expense: ")
+	tax_rate := handleUserInput("Enter Tax rate: ")
 
-	fmt.Scan(&revenue)
-	print("Enter Expense: ")
-	// Expense test ssh using ~/.ssh/config
-	fmt.Scan(&expenses)
+	ebt_value, earning_after_tax, ratio := calculateFinancials(revenue, expenses, tax_rate)
+	fmt.Printf("EBT : %.1f \n", ebt_value)
+	fmt.Printf("Profit : %.1f \n", earning_after_tax)
+	fmt.Printf("Ratio : %.12f \n", ratio)
 
-	print("Enter Tax rate: ")
-
-	// Tax rate
-	fmt.Scan(&tax_rate)
-
+}
+func calculateFinancials(revenue, expenses, taxRate float64) (float64, float64, float64) {
 	ebt_value := revenue - expenses
-	tax_expenses := float64(ebt_value * int(tax_rate) / 100)
+	tax_expenses := float64(ebt_value*taxRate) / 100
 	earning_after_tax := float64(ebt_value) - tax_expenses
 
 	ratio := float64(ebt_value) / float64(earning_after_tax)
 
-	print("EBT : ", ebt_value, "\n")
-	print("Profit : ", int(earning_after_tax), "\n")
-	print("Ratio : ")
-	fmt.Printf("%.12f\n", ratio)
+	return ebt_value, earning_after_tax, ratio
+}
 
+func handleUserInput(infoText string) float64 {
+	input := 0.0
+	// Revenue
+	print(infoText)
+
+	fmt.Scan(&input)
+
+	return input
 }
