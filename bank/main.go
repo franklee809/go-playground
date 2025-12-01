@@ -10,13 +10,13 @@ import (
 func readBalanceFromFile() (float64, error) {
 	data, err := os.ReadFile("test.txt")
 	if err != nil {
-		return 1000.0, errors.New("Failed to find new balance file")
+		return 1000.0, errors.New("failed to find new balance file")
 	}
 	fmt.Println("data :", string(data))
 	balance, err := strconv.ParseFloat(string(data), 32)
 
 	if err != nil {
-		return 1000.0, errors.New("Failed to parse balance value")
+		return 1000.0, errors.New("failed to parse balance value")
 	}
 	return balance, nil
 }
@@ -33,11 +33,11 @@ func main() {
 	if err != nil {
 		fmt.Println("Error")
 		fmt.Println("The error value : ", err)
-		fmt.Println("------------------------------")
+		fmt.Println("------------------------------------------------------------------------------------------")
+		panic("Can't continue, sorry")
 	}
 	var accountBalance = balance
 	writeBalanceToFile(accountBalance)
-	// return
 
 	fmt.Println("Welcome to the Go Bank!")
 	fmt.Println("What do you want to do?")
