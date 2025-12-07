@@ -41,7 +41,7 @@ func main() {
 
 	fmt.Println("Welcome to the Go Bank!")
 
-	for range 2 {
+	for {
 		presentOptions()
 
 		var choice int
@@ -70,6 +70,8 @@ func main() {
 		default:
 			fmt.Println("Bye bye")
 			fmt.Println("Thanks for choosing our bank")
+			os.Exit(0)
+			// return
 		}
 
 	}
