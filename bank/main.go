@@ -7,28 +7,28 @@ import (
 	"strconv"
 )
 
-func readBalanceFromFile() (float64, error) {
-	data, err := os.ReadFile("test.txt")
+func readBalanceFromFile(fileName string) (float64, error) {
+	data, err := os.ReadFile(fileName)
 	if err != nil {
 		return 1000.0, errors.New("failed to find new balance file")
 	}
 	fmt.Println("data :", string(data))
-	balance, err := strconv.ParseFloat(string(data), 32)
+	value, err := strconv.ParseFloat(string(data), 32)
 
 	if err != nil {
-		return 1000.0, errors.New("failed to parse balance value")
+		return 1000.0, errors.New("failed to parse value")
 	}
-	return balance, nil
+	return value, nil
 }
 
-func writeBalanceToFile(balance float64) {
+func writeBalanceToFile(balance float64, filename string) {
 	var balanceText string = fmt.Sprint(balance)
 	fmt.Println(balanceText)
-	os.WriteFile("test.txt", []byte(balanceText), os.FileMode(0644))
+	os.WriteFile(filename, []byte(balanceText), os.FileMode(0644))
 }
 
 func main() {
-	balance, err := readBalanceFromFile()
+	balance, err := readBalanceFromFile("test.txt")
 
 	if err != nil {
 		fmt.Println("Error")
@@ -37,7 +37,7 @@ func main() {
 		panic("Can't continue, sorry")
 	}
 	var accountBalance = balance
-	writeBalanceToFile(accountBalance)
+	writeBalanceToFile(accountBalance, "test.txt")
 
 	fmt.Println("Welcome to the Go Bank!")
 
