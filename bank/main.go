@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"example.com/bank/fileops"
+	"github.com/Pallinder/go-randomdata"
 )
 
 func main() {
@@ -15,11 +16,12 @@ func main() {
 		fmt.Println("The error value : ", err)
 		panic("Can't continue, sorry")
 	}
+
 	var accountBalance = balance
 	fileops.WriteBalanceToFile(accountBalance, "test.txt")
 
 	fmt.Println("Welcome to the Go Bank!")
-
+	fmt.Println("Phone: ", randomdata.PhoneNumber())
 	for {
 		presentOptions()
 
