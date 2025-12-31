@@ -1,7 +1,0 @@
-openssl s_client -connect mail.gmail.com:465 
-
-
-Error log
-
-4155576384:error:2008F002:BIO routines:BIO_lookup_ex:system lib:../crypto/bio/b_addr.c:730:Name or service not known
-connect:errno=22
