@@ -12,24 +12,7 @@ type user struct {
 	createdAt time.Time
 }
 
-
-func main(){
-	firstName := getUserData("Please enter your first name : ")
-	lastName := getUserData("Please enter your last name : ")
-	birthDate := getUserData("Please enter your birth date (DD/MM/YYYY) : ")
-
-	var appUser user
-	appUser = user {
-		firstName: firstName,
-		lastName: lastName,
-		birthDate: birthDate,
-		createdAt: time.Now(),
-	}
-	// fmt.Println(appUser)
-	outputUserDetails(appUser)
-}
-
-func outputUserDetails(u user) {
+func (u user) outputUserDetails() {
 	fmt.Println("User Details:")
 	fmt.Printf("First Name: %s\n", u.firstName)
 	fmt.Printf("Last Name: %s\n", u.lastName)
@@ -37,10 +20,32 @@ func outputUserDetails(u user) {
 	fmt.Printf("Account Created At: %s\n", u.createdAt.Format(time.RFC1123))
 }
 
+func (u *user) clearUserName() {
+	u.firstName = ""
+	u.lastName = ""
+}
+
+func main() {
+	firstName := getUserData("Please enter your first name : ")
+	lastName := getUserData("Please enter your last name : ")
+	birthDate := getUserData("Please enter your birth date (DD/MM/YYYY) : ")
+
+	var appUser user
+	appUser = user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}
+	appUser.outputUserDetails()
+	appUser.clearUserName()
+	appUser.outputUserDetails()
+}
+
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 
-	var value string;
+	var value string
 	fmt.Scan(&value)
 	return value
 }
