@@ -25,7 +25,16 @@ func main(){
 		birthDate: birthDate,
 		createdAt: time.Now(),
 	}
-	fmt.Println(appUser)
+	// fmt.Println(appUser)
+	outputUserDetails(appUser)
+}
+
+func outputUserDetails(u user) {
+	fmt.Println("User Details:")
+	fmt.Printf("First Name: %s\n", u.firstName)
+	fmt.Printf("Last Name: %s\n", u.lastName)
+	fmt.Printf("Birth Date: %s\n", u.birthDate)
+	fmt.Printf("Account Created At: %s\n", u.createdAt.Format(time.RFC1123))
 }
 
 func getUserData(promptText string) string {
