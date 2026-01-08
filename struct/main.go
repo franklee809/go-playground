@@ -20,6 +20,15 @@ func (u user) outputUserDetails() {
 	fmt.Printf("Account Created At: %s\n", u.createdAt.Format(time.RFC1123))
 }
 
+func newUser(firstName, lastName, birthDate string) *user {
+	return &user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}
+}
+
 func (u *user) clearUserName() {
 	u.firstName = ""
 	u.lastName = ""
@@ -30,13 +39,8 @@ func main() {
 	lastName := getUserData("Please enter your last name : ")
 	birthDate := getUserData("Please enter your birth date (DD/MM/YYYY) : ")
 
-	var appUser user
-	appUser = user{
-		firstName: firstName,
-		lastName:  lastName,
-		birthDate: birthDate,
-		createdAt: time.Now(),
-	}
+	var appUser *user
+	appUser = newUser(firstName, lastName, birthDate)
 	appUser.outputUserDetails()
 	appUser.clearUserName()
 	appUser.outputUserDetails()
