@@ -14,7 +14,24 @@ type saver interface {
 	Save() error
 }
 
+type displayer interface {
+	Display()
+}
+
+type outputtable interface {
+	saver
+	displayer
+}
+
+// type outputtable interface {
+// 	Save() error
+// 	Display()
+// }
+
 func main() {
+	printSomething(1)
+	printSomething("sample text")
+	printSomething(true)
 	title := getUserInput("Note title: ")
 
 	content := getUserInput("Note content : ")
@@ -26,13 +43,11 @@ func main() {
 		return
 	}
 
-	todo.Display()
-	err = saveData(todo)
+	outputData(todo)
 
 	// println(title, content)
 	userNote, err := note.New(title, content)
-	userNote.Display()
-	err = saveData(userNote)
+	err = outputData(userNote)
 
 	if err != nil {
 		return
@@ -55,6 +70,25 @@ func getUserInput(prompt string) string {
 	text = strings.TrimSuffix(text, "\n")
 	text = strings.TrimSuffix(text, "\r")
 	return text
+}
+
+func printSomething(value interface{}) {
+	switch v := value.(type) {
+	case int:
+		fmt.Println("Integer:", v)
+	case string:
+		fmt.Println("String:", v)
+	case bool:
+		fmt.Println("Boolean:", v)
+	default:
+		fmt.Println("Unknown type")
+	}
+	fmt.Println("Hello, World!")
+}
+
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
 }
 
 func saveData(data saver) error {
