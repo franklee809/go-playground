@@ -73,17 +73,37 @@ func getUserInput(prompt string) string {
 }
 
 func printSomething(value interface{}) {
-	switch v := value.(type) {
-	case int:
-		fmt.Println("Integer:", v)
-	case string:
-		fmt.Println("String:", v)
-	case bool:
-		fmt.Println("Boolean:", v)
-	default:
-		fmt.Println("Unknown type")
+	typedVal, ok := value.(int)
+
+	if ok {
+		println("Integer: ", typedVal)
+		return
 	}
-	fmt.Println("Hello, World!")
+
+	floatVal, ok := value.(float64)
+
+	if ok {
+		fmt.Println("Float : ", floatVal)
+		return
+	}
+
+	stringVal, ok := value.(string)
+
+	if ok {
+		fmt.Println("Float : ", stringVal)
+		return
+	}
+	// switch v := value.(type) {
+	// case int:
+	// 	fmt.Println("Integer:", v)
+	// case string:
+	// 	fmt.Println("String:", v)
+	// case bool:
+	// 	fmt.Println("Boolean:", v)
+	// default:
+	// 	fmt.Println("Unknown type")
+	// }
+	// fmt.Println("Hello, World!")
 }
 
 func outputData(data outputtable) error {
