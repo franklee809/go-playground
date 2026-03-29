@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+type TestProduct struct {
+	id    string
+	title string
+	price float64
+}
+
 func TestMap(t *testing.T) {
 	websites := map[string]string{
 		"Google": "https://www.google.com",
