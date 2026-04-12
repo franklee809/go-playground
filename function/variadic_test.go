@@ -6,14 +6,16 @@ import (
 )
 
 func TestVariadic(t *testing.T) {
-	// numbers := []int{1, 10, 15}
+	numbers := []int{1, 10, 15}
 	sum := sumup(1, 2, 3)
 
+	anotherSum := sumup(1, numbers...)
 	fmt.Println(sum)
+	fmt.Println(anotherSum)
 
 }
 
-func sumup(numbers ...int) int {
+func sumup(startingValue int, numbers ...int) int {
 	fmt.Println(numbers)
 	sum := 0
 
