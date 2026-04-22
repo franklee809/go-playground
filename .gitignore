@@ -35,3 +35,4 @@ go.work.sum
 # .vscode/
 # note_101.json
 *.json
+.codex
