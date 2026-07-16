@@ -13,8 +13,19 @@ func TestTaxRate(t *testing.T) {
 
 	for _, taxRate := range taxRates {
 		fm := filemanager.New("prices.txt", fmt.Sprintf("result_%.0f.json", taxRate*100))
+		// cmdm := cmdmanagergo.New()
 		priceJob := prices.NewTaxIncludedPriceJob(fm, taxRate)
-		priceJob.Process()
+		err := priceJob.Process()
+
+		if err != nil {
+			fmt.Println("Could not process job")
+			fmt.Println(err)
+		}
 
 	}
+}
+
+type IOManager interface {
+	ReadLines() ([]string, error)
+	WriteResult(data interface{}) error
 }
