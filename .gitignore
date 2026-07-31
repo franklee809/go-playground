@@ -34,7 +34,6 @@ go.work.sum
 # .idea/
 # note_101.json
 *.json
-# ...but keep the shared VSCode config
-!.vscode/settings.json
-!.vscode/launch.json
+# ...but keep the whole VSCode config directory
+!.vscode/**
 .codex
