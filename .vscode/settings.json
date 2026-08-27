@@ -1,3 +1,4 @@
 {
-    "go.testFlags": ["-v"]
+    "go.testFlags": ["-v"],
+    "chat.fontSize": 16,
 }

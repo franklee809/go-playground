@@ -1,0 +1,201 @@
+{
+  "info": {
+    "_postman_id": "b3ba9f42-80dd-44c5-a477-12e517db22f6",
+    "name": "REST API",
+    "description": "Collection for the Go Gin events API. Each request includes endpoint documentation plus saved success and failure examples.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "eventId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Events",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/events",
+        "description": "### GET /events\n\nReturns every event stored in the SQLite database.\n\n**Success:** `200 OK` with an array of events (or `[]` when none exist).\n\n**Failure:** `500 Internal Server Error` when the events cannot be read from the database."
+      },
+      "response": [
+        {
+          "name": "Success — 200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/events"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"ID\": 1,\n    \"Name\": \"Go Meetup\",\n    \"Description\": \"An evening meetup for Go developers\",\n    \"Location\": \"Kuala Lumpur\",\n    \"DateTime\": \"2026-08-20T18:30:00Z\",\n    \"UserID\": 1\n  }\n]"
+        },
+        {
+          "name": "Failure — 500 Internal Server Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/events"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Could not fetch events. Try again later.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Event by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/events/{{eventId}}",
+        "description": "### GET /events/:id\n\nReturns the event selected by the collection's `eventId` variable.\n\n**Success:** `200 OK` with the event object.\n\n**Failure:** `400 Bad Request` when `id` is not an integer. A missing event currently returns `500 Internal Server Error`."
+      },
+      "response": [
+        {
+          "name": "Success — 200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/events/{{eventId}}"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"ID\": 1,\n  \"Name\": \"Go Meetup\",\n  \"Description\": \"An evening meetup for Go developers\",\n  \"Location\": \"Kuala Lumpur\",\n  \"DateTime\": \"2026-08-20T18:30:00Z\",\n  \"UserID\": 1\n}"
+        },
+        {
+          "name": "Failure — 400 Bad Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/events/not-an-id"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Could not parse event id.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Event",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Go Meetup\",\n  \"description\": \"An evening meetup for Go developers\",\n  \"location\": \"Kuala Lumpur\",\n  \"dateTime\": \"2026-08-20T18:30:00Z\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/events",
+        "description": "### POST /events\n\nCreates an event. The JSON body must include non-empty `name`, `description`, `location`, and an RFC 3339 `dateTime`. The server assigns the event ID and user ID.\n\n**Success:** `201 Created` with the created event.\n\n**Failure:** `400 Bad Request` for malformed JSON or missing required fields; `500 Internal Server Error` when the event cannot be saved."
+      },
+      "response": [
+        {
+          "name": "Success — 201 Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Go Meetup\",\n  \"description\": \"An evening meetup for Go developers\",\n  \"location\": \"Kuala Lumpur\",\n  \"dateTime\": \"2026-08-20T18:30:00Z\"\n}"
+            },
+            "url": "{{baseUrl}}/events"
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Event created!\",\n  \"event\": {\n    \"ID\": 1,\n    \"Name\": \"Go Meetup\",\n    \"Description\": \"An evening meetup for Go developers\",\n    \"Location\": \"Kuala Lumpur\",\n    \"DateTime\": \"2026-08-20T18:30:00Z\",\n    \"UserID\": 1\n  }\n}"
+        },
+        {
+          "name": "Failure — 400 Bad Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Go Meetup\"\n}"
+            },
+            "url": "{{baseUrl}}/events"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Could not parse the request body\"\n}"
+        }
+      ]
+    }
+  ]
+}

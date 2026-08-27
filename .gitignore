@@ -34,6 +34,8 @@ go.work.sum
 # .idea/
 # note_101.json
 *.json
+!rest_api/postman_collection.json
+!rest_api/postman_local_environment.json
 # ...but keep the whole VSCode config directory
 !.vscode/**
 .codex
