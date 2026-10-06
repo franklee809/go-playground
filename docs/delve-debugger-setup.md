@@ -6,13 +6,22 @@ Delve (`dlv`) is the standard debugger for Go. It lets you set breakpoints, step
 
 ## Install
 
+Requires system Go 1.25.3 or later (see the [README](../README.md#setup)).
+
 ```bash
 go install github.com/go-delve/delve/cmd/dlv@latest
 ```
 
-## Common Gotcha: Go Toolchain Mismatch
+Verify:
 
-If your project uses a newer Go version via `go.mod` toolchain directive (e.g. `go 1.25.3`), but your system's base Go is older (e.g. 1.24.4), Delve will fail with:
+```bash
+go version ~/go/bin/dlv
+# Should output: go1.25.3 (or later)
+```
+
+## Troubleshooting: Go Toolchain Mismatch
+
+Only applies if your system's base Go is older than 1.25 (e.g. 1.24.4) while the project's `go.mod` says `go 1.25.3`. Delve then fails with:
 
 ```
 To debug executables using DWARFv5 or later Delve must be built with Go version 1.25.0 or later
@@ -20,21 +29,14 @@ To debug executables using DWARFv5 or later Delve must be built with Go version 
 
 ### Why?
 
-`go install` for external tools uses your **base** Go version, not the toolchain version specified in your project's `go.mod`.
+`go install` for external tools uses your **base** Go version, not the version in your project's `go.mod`.
 
 ### Fix
 
-Force the correct toolchain when installing:
+Upgrade the system Go (see the [README](../README.md#setup)), or force the toolchain when installing:
 
 ```bash
-GOTOOLCHAIN=go1.25.3 go install github.com/go-delve/delve/cmd/dlv@master
-```
-
-Verify:
-
-```bash
-go version ~/go/bin/dlv
-# Should output: go1.25.3
+GOTOOLCHAIN=go1.25.3 go install github.com/go-delve/delve/cmd/dlv@latest
 ```
 
 ## Using Delve in VSCode
